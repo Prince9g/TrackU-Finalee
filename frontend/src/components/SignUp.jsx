@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { sendOtp, registerUser } from '../api'; // Import your API functions
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { useNavigate } from 'react-router-dom';
 const SignUp = () => {
   const initialFormState = {
     username: '',
@@ -11,7 +11,7 @@ const SignUp = () => {
     password: '',
     confirmPassword: '',
   };
-
+  const navigate = useNavigate();
   const [formData, setFormData] = useState(initialFormState);
   const [otpSent, setOtpSent] = useState(false);
 
@@ -45,8 +45,11 @@ const SignUp = () => {
       const response = await registerUser(formData);
 
       if (response.success) {
-        toast.success("User registered successfully");
+        toast.success(response.message || "User Registered SuccessFully!!");
         resetForm();
+        setTimeout(()=>{
+          navigate('/login');
+        }, (500));
       } else if (response.error) {
         toast.error(response.error);
       } else {
@@ -159,14 +162,12 @@ const SignUp = () => {
           </div>
 
           {/* Register Button */}
-          <div>
             <button
               type="submit"
               className="w-full px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
             >
               Register
             </button>
-          </div>
         </form>
       </div>
     </div>
@@ -174,3 +175,5 @@ const SignUp = () => {
 };
 
 export default SignUp;
+
+

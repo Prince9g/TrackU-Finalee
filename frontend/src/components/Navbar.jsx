@@ -1,5 +1,6 @@
 import React from "react";
 import { MenuIcon, BellIcon } from "@heroicons/react/outline";
+import { Link } from "react-router-dom";
 
 // Sample TrackU logo (using an emoji for now)
 const TrackULogo = () => (
@@ -43,7 +44,7 @@ const Navbar = () => {
             </div>
               <div className="absolute right-4 w-48 mt-2 origin-top-right bg-white text-indigo-600 rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               <a href="#" className="block px-4 py-2 hover:bg-gray-100">Profile Setting</a>
-              <a href="#" className="block px-4 py-2 text-red-600 hover:bg-gray-100">Logout</a>
+              <Link to ="/" className="block px-4 py-2 text-red-600 hover:bg-gray-100">Logout</Link>
             </div>
           </div>
         </div>

@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { LoginUser } from '../api'; // Import your API functions
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const initialFormState = {
     mobile: '',
     password: '',
   };
-
+  const navigate = useNavigate();
   const [formData, setFormData] = useState(initialFormState);
 
   const handleChange = (e) => {
@@ -23,6 +24,9 @@ const Login = () => {
       if (response.success) {
         toast.success(response.message);
         resetForm();
+        setTimeout(()=>{
+          navigate('/dashboard');
+        }, (1000));
       } else if (response.error) {
         toast.error(response.error);
       } else {
@@ -83,14 +87,12 @@ const Login = () => {
           </div>
 
           {/* Login Button */}
-          <div>
             <button
               type="submit"
               className="w-full px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
             >
               Login
             </button>
-          </div>
         </form>
       </div>
     </div>
